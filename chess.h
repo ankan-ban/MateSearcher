@@ -253,6 +253,7 @@ public:
     CUDA_CALLABLE_MEMBER unsigned int getTo()    const {return (m_Move >> 6)  & 0x3F;}
     CUDA_CALLABLE_MEMBER unsigned int getFrom()  const {return (m_Move)       & 0x3F;}
     CUDA_CALLABLE_MEMBER unsigned int getFlags() const {return (m_Move >> 12) & 0x0F;}
+    CUDA_CALLABLE_MEMBER unsigned int getRAW() const   {return m_Move; }
 
 #if 0
     CUDA_CALLABLE_MEMBER bool operator == (CMove a) const {return (m_Move == a.m_Move);}
@@ -818,6 +819,39 @@ struct CompactPosRecord
 
 CT_ASSERT(sizeof(CompactPosRecord) == 32);
 
+// expanded bit board
+struct ExpandedBitBoard
+{
+    uint64 allPieces;
+    uint64 myPieces;
+    uint64 enemyPieces;
+
+    uint64 knights;
+    uint64 bishopQueens;
+    uint64 rookQueens;
+    uint64 kings;
+    uint64 pawns;
+
+    uint64 myPawns;
+    uint64 myKing;
+    uint64 myKnights;
+    uint64 myBishopQueens;
+    uint64 myRookQueens;
+
+    uint64 enemyPawns;
+    uint64 enemyKing;
+    uint64 enemyKnights;
+    uint64 enemyBishopQueens;
+    uint64 enemyRookQueens;
+
+    uint64 pinned;
+    uint64 threatened;
+
+    uint8  myKingIndex;
+    uint8  enPassent;
+    uint8  whiteCastle;
+    uint8  blackCastle;
+};
 
 
 #endif

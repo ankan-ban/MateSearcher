@@ -123,3 +123,7 @@
 #else
 #define CUDA_CALLABLE_MEMBER
 #endif
+
+// try lazy SMP - launch multiple threads with same work and hope that they finish faster due to transposition table
+// doesn't seem to work at all!
+#define USE_LAZY_SMP 0
